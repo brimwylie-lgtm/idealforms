@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IdealForms | Done-for-you online forms</title>
+<meta name="description" content="Tell us what you need to collect and we build the form. Branded online forms for bookings, intake, payments, waivers and quotes, with a simple monthly plan.">
+<meta property="og:title" content="IdealForms | Done-for-you online forms">
+<meta property="og:description" content="Branded online forms built for you. Small setup fee, simple monthly plan.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#15203A">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;600;800&family=Funnel+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a printed intake form. Sections are numbered fields on ruled paper; the hero is a live form you can fill in. */
+:root{
+  --paper:#EDF1EF; --sheet:#F8FAF9; --ink:#15203A; --muted:#5B6678; --rule:#C9D3CF;
+  --accent:#2E47E6; --accent-ink:#FFFFFF; --mark:#F2D44A;
+  --f-display:"Funnel Display","Segoe UI",system-ui,sans-serif;
+  --f-body:"Funnel Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0E1320; --sheet:#151C2D; --ink:#E6EAF2; --muted:#9AA4B8; --rule:#2A3449;
+  --accent:#7B8CFF; --accent-ink:#0E1320; --mark:#E0C23A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1320; --sheet:#151C2D; --ink:#E6EAF2; --muted:#9AA4B8; --rule:#2A3449;
+  --accent:#7B8CFF; --accent-ink:#0E1320; --mark:#E0C23A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.05}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.req{color:var(--accent);font-weight:600}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px;flex-wrap:wrap}
+.logo{font-family:var(--f-display);font-weight:800;font-size:22px;display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+.logo-box{width:22px;height:22px;border:2.5px solid var(--ink);border-radius:4px;position:relative}
+.logo-box::after{content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid var(--accent);border-width:0 3px 3px 0;transform:rotate(40deg)}
+nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0;flex-wrap:wrap}
+nav ul a{color:var(--ink);text-decoration:none;font-size:15px}
+nav ul a:hover{color:var(--accent)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start;padding-block:40px 72px}
+.hero h1{font-size:clamp(44px,6.4vw,82px);font-weight:800;letter-spacing:-.025em}
+.hero h1 .hl{background:linear-gradient(transparent 62%,var(--mark) 62%,var(--mark) 92%,transparent 92%);padding:0 .06em}
+.hero p.lede{font-size:20px;color:var(--muted);max-width:34ch;margin:24px 0 32px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 16px var(--f-body);padding:14px 22px;border-radius:6px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{color:var(--accent-ink)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.trust{margin-top:28px;display:flex;gap:18px;flex-wrap:wrap}
+.trust span{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.trust span::before{content:"\2713  ";color:var(--accent)}
+
+/* live form */
+.sheet{background:var(--sheet);border:1.5px solid var(--rule);border-radius:10px;padding:28px;box-shadow:0 1px 0 var(--rule),0 18px 40px -24px rgba(21,32,58,.35);min-width:0}
+.sheet-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px dashed var(--rule);padding-bottom:14px;margin-bottom:22px;gap:12px}
+.progress{height:4px;background:var(--rule);border-radius:4px;overflow:hidden;margin-bottom:24px}
+.progress i{display:block;height:100%;width:33%;background:var(--accent);transition:width .35s ease}
+.q h3{font-size:26px;font-weight:600;margin-bottom:6px}
+.q .hint{color:var(--muted);font-size:15px;margin:0 0 18px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1.5px solid var(--rule);border-radius:7px;cursor:pointer;background:var(--paper);font-size:16px;text-align:left;color:var(--ink);font-family:var(--f-body);width:100%}
+.opt:hover{border-color:var(--accent)}
+.opt .key{font-family:var(--f-mono);font-size:12px;border:1.5px solid var(--rule);border-radius:4px;min-width:24px;height:24px;display:grid;place-items:center;color:var(--muted)}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--paper))}
+.opt[aria-pressed="true"] .key{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px;gap:12px}
+.q-nav button.link{background:none;border:0;color:var(--muted);font:500 15px var(--f-body);cursor:pointer;padding:6px 0}
+.q-nav button.link:disabled{opacity:.35;cursor:default}
+.result .price{font-family:var(--f-display);font-size:56px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.result .price small{font-size:17px;font-weight:600;color:var(--muted);letter-spacing:0}
+.result ul{padding-left:20px;margin:16px 0 20px;color:var(--muted)}
+.example-tag{display:inline-block;font-family:var(--f-mono);font-size:11px;background:var(--mark);color:#15203A;padding:2px 7px;border-radius:3px;letter-spacing:.06em}
+
+/* sections */
+section.field{border-top:1.5px solid var(--ink);padding-block:56px}
+.field-head{display:grid;grid-template-columns:150px 1fr;gap:24px;margin-bottom:36px}
+.field-head .num{font-family:var(--f-mono);font-size:13px;color:var(--muted);padding-top:10px}
+.field-head h2{font-size:clamp(32px,4.2vw,50px);font-weight:800;letter-spacing:-.02em}
+.field-head p{color:var(--muted);max-width:60ch;margin:14px 0 0;font-size:18px}
+.indent{margin-left:174px}
+
+/* features as checkbox list */
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule)}
+.check{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:20px 18px 20px 0;border-bottom:1px solid var(--rule)}
+.box{width:20px;height:20px;border:2px solid var(--ink);border-radius:3px;margin-top:3px;position:relative}
+.box::after{content:"";position:absolute;left:5px;top:0;width:5px;height:11px;border:solid var(--accent);border-width:0 2.5px 2.5px 0;transform:rotate(40deg)}
+.check b{display:block;font-weight:600;font-size:17px}
+.check span{color:var(--muted);font-size:15px}
+
+/* uses */
+.uses{display:flex;flex-wrap:wrap;gap:10px}
+.uses span{border:1.5px solid var(--rule);background:var(--sheet);border-radius:999px;padding:8px 16px;font-size:15px}
+
+/* examples */
+.examples{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ex{background:var(--sheet);border:1.5px solid var(--rule);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ex .mock{border:1.5px dashed var(--rule);border-radius:6px;padding:14px;display:grid;gap:8px;margin-bottom:6px}
+.ex .mock i{display:block;height:9px;border-radius:3px;background:var(--rule)}
+.ex .mock i.s{width:45%}.ex .mock i.m{width:70%}
+.ex .mock i.b{height:26px;background:transparent;border:1.5px solid var(--rule)}
+.ex .mock i.c{width:34%;height:22px;background:var(--accent);opacity:.8}
+.ex h3{font-size:22px;font-weight:600}
+.ex p{color:var(--muted);font-size:15px;margin:0;flex:1}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s}
+.step{border-top:3px solid var(--accent);padding-top:16px}
+.step .label{display:block;margin-bottom:8px}
+.step h3{font-size:21px;font-weight:600;margin-bottom:6px}
+.step p{color:var(--muted);font-size:15px;margin:0}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plan{background:var(--sheet);border:1.5px solid var(--rule);border-radius:10px;padding:26px;display:flex;flex-direction:column;min-width:0}
+.plan.feat{border:2px solid var(--ink);position:relative}
+.plan.feat::before{content:"Most picked";position:absolute;top:-12px;left:22px;background:var(--mark);color:#15203A;font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:3px}
+.plan h3{font-size:24px;font-weight:600}
+.plan .amt{font-family:var(--f-display);font-weight:800;font-size:46px;letter-spacing:-.02em;margin:14px 0 2px;font-variant-numeric:tabular-nums}
+.plan .amt small{font-size:16px;color:var(--muted);font-weight:600;letter-spacing:0}
+.plan .per{color:var(--muted);font-size:14px;margin-bottom:18px}
+.plan ul{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:9px;flex:1}
+.plan li{padding-left:24px;position:relative;font-size:15px}
+.plan li::before{content:"";position:absolute;left:2px;top:6px;width:5px;height:10px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(40deg)}
+.plan .btn{justify-content:center}
+.addon{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:15px;color:var(--muted)}
+.addon b{color:var(--ink);font-weight:600}
+
+/* faq */
+.faq{display:grid;gap:0;border-top:1px solid var(--rule)}
+details{border-bottom:1px solid var(--rule);padding:18px 0}
+summary{cursor:pointer;font-weight:600;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--accent);font-size:20px;line-height:1}
+details[open] summary::after{content:"\2013"}
+details p{color:var(--muted);margin:10px 0 0;max-width:68ch}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.cf{display:grid;gap:16px}
+.cf label{display:grid;gap:6px;font-size:15px;font-weight:500}
+.cf input,.cf select,.cf textarea{font:16px var(--f-body);padding:12px 14px;border:1.5px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);width:100%}
+.cf input:focus,.cf select:focus,.cf textarea:focus{border-color:var(--accent);outline:none}
+.sent{font-family:var(--f-mono);font-size:14px;color:var(--accent)}
+
+footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:36px}
+  .field-head{grid-template-columns:1fr;gap:8px}
+  .field-head .num{padding-top:0}
+  .indent{margin-left:0}
+  .checks,.examples,.plans{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .contact{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  nav ul{display:none}
+  .checks,.examples,.plans,.steps{grid-template-columns:1fr}
+  .sheet{padding:20px}
+  .result .price{font-size:44px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <div class="logo"><span class="logo-box" aria-hidden="true"></span>IdealForms</div>
+  <ul>
+    <li><a href="#what">What it does</a></li>
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#start">Get started</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div>
+    <span class="label">Done-for-you online forms</span>
+    <h1 style="margin-top:14px">Tell us what you need to collect. We build the <span class="hl">form</span>.</h1>
+    <p class="lede">Bookings, intake, payments, waivers, quotes. Branded to your business, on your own web address, with every response landing where you want it.</p>
+    <div class="cta-row">
+      <a class="btn" href="#start">Start a form</a>
+      <a class="btn ghost" href="#examples">See live examples</a>
+    </div>
+    <div class="trust"><span>Live in 3 business days</span><span>No software to learn</span><span>You own your data</span></div>
+  </div>
+
+  <div class="sheet" id="quote" aria-live="polite">
+    <div class="sheet-head">
+      <span class="label">Quick quote</span>
+      <span class="label" id="stepLbl">Question 1 of 3</span>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+    <div id="qBody"></div>
+  </div>
+</header>
+
+<section class="field" id="what">
+  <div class="field-head">
+    <span class="num">01 / Capabilities</span>
+    <div>
+      <h2>Everything a serious form tool does. None of the setup.</h2>
+      <p>We use professional form software behind the scenes and configure it for you. You get the finished result, not another login to manage.</p>
+    </div>
+  </div>
+  <div class="checks indent">
+    <div class="check"><span class="box"></span><div><b>Take payments</b><span>Deposits, fees and orders through Stripe, right inside the form.</span></div></div>
+    <div class="check"><span class="box"></span><div><b>File and photo uploads</b><span>Resumes, receipts, job-site photos. No file size cap.</span></div></div>
+    <div class="check"><span class="box"></span><div><b>E-signatures</b><span>Waivers, consent and sign-offs signed on any phone.</span></div></div>
+    <div class="check"><span class="box"></span><div><b>Smart questions</b><span>Questions appear or skip based on earlier answers.</span></div></div>
+    <div class="check"><span class="box"></span><div><b>Instant price calculators</b><span>Quotes that total up as customers pick options.</span></div></div>
+    <div class="check"><span class="box"></span><div><b>Your brand, your address</b><span>Your logo and colours at forms.yourbusiness.ca. No third-party branding.</span></div></div>
+    <div class="check"><span class="box"></span><div><b>Responses where you work</b><span>Email alerts, Google Sheets, Notion, Airtable, or your CRM.</span></div></div>
+    <div class="check"><span class="box"></span><div><b>Catch half-finished forms</b><span>See what people typed even if they never hit submit.</span></div></div>
+    <div class="check"><span class="box"></span><div><b>See where people drop off</b><span>Visit and completion numbers so we can fix weak questions.</span></div></div>
+  </div>
+</section>
+
+<section class="field">
+  <div class="field-head">
+    <span class="num">02 / Common uses</span>
+    <div><h2>Built for the forms people actually run on.</h2><p>Business workflows that run every day, and personal ones that run for a single event.</p></div>
+  </div>
+  <div class="uses indent">
+    <span>Client intake</span><span>Quote requests</span><span>Event registration</span><span>Liability waivers</span><span>Job applications</span><span>Customer feedback</span><span>Order forms</span><span>Booking requests</span><span>Contest entries</span><span>Volunteer sign-ups</span><span>Lead capture</span><span>Membership renewals</span><span>Party RSVPs</span><span>Club and team sign-ups</span><span>Reunion planning</span>
+  </div>
+</section>
+
+<section class="field" id="examples">
+  <div class="field-head">
+    <span class="num">03 / Live examples</span>
+    <div>
+      <h2>Real forms, running right now.</h2>
+      <p>Open one and try it. These are the same builds clients get.</p>
+    </div>
+  </div>
+  <div class="examples indent">
+    <article class="ex">
+      <div class="mock" aria-hidden="true"><i class="s"></i><i class="b"></i><i class="m"></i><i class="b"></i><i class="c"></i></div>
+      <span class="example-tag">LIVE</span>
+      <h3>TL;DW Studios</h3>
+      <p>Free-sample request form for a content repurposing studio, embedded right on the client's own site.</p>
+      <a href="https://www.tldwstudios.com/#contact" target="_blank" rel="noopener">Open the live form &rarr;</a>
+    </article>
+    <article class="ex">
+      <div class="mock" aria-hidden="true"><i class="m"></i><i class="b"></i><i class="b"></i><i class="s"></i><i class="c"></i></div>
+      <span class="example-tag">COMING SOON</span>
+      <h3>Event registration</h3>
+      <p>Ticket choice, running total and Stripe checkout in one flow.</p>
+      <a href="#examples">Open the live form &rarr;</a>
+    </article>
+    <article class="ex">
+      <div class="mock" aria-hidden="true"><i class="s"></i><i class="b"></i><i class="m"></i><i class="b"></i><i class="c"></i></div>
+      <span class="example-tag">COMING SOON</span>
+      <h3>Waiver with signature</h3>
+      <p>Participant details, terms and a signature that saves to a PDF.</p>
+      <a href="#examples">Open the live form &rarr;</a>
+    </article>
+  </div>
+</section>
+
+<section class="field">
+  <div class="field-head">
+    <span class="num">04 / Process</span>
+    <div><h2>Four steps, about a week end to end.</h2></div>
+  </div>
+  <div class="steps indent">
+    <div class="step"><span class="label">Day 1</span><h3>Tell us the job</h3><p>A short brief: what you collect, who fills it in, where answers go.</p></div>
+    <div class="step"><span class="label">Day 2&ndash;3</span><h3>We build it</h3><p>Branded, tested on phone and desktop, connected to your tools.</p></div>
+    <div class="step"><span class="label">Day 4</span><h3>You review</h3><p>A round of changes is included before launch.</p></div>
+    <div class="step"><span class="label">Day 5</span><h3>Go live</h3><p>We hand you a link, a website embed, and a QR code.</p></div>
+  </div>
+</section>
+
+<section class="field" id="pricing">
+  <div class="field-head">
+    <span class="num">05 / Pricing</span>
+    <div>
+      <h2>A small setup fee. A simple monthly plan.</h2>
+      <p>Prices in CAD. No per-response fees and no limit on submissions. Business plans include ongoing care, so your form keeps working as your business changes.</p>
+    </div>
+  </div>
+  <div class="plans indent">
+    <div class="plan">
+      <h3>Personal</h3>
+      <div class="amt">$59</div>
+      <div class="per">one-time, live for 6 months</div>
+      <ul>
+        <li>One form, up to 15 questions</li>
+        <li>Clean, unbranded design</li>
+        <li>Email alert on every response</li>
+        <li>Google Sheets export</li>
+        <li>For events, clubs and one-offs</li>
+      </ul>
+      <a class="btn ghost" href="#start">Choose Personal</a>
+    </div>
+    <div class="plan feat">
+      <h3>Business</h3>
+      <div class="amt">$29<small>/mo</small></div>
+      <div class="per">+ $99 one-time setup</div>
+      <ul>
+        <li>One form, unlimited questions</li>
+        <li>Your logo, colours and web address</li>
+        <li>Email alerts and Google Sheets</li>
+        <li>Smart questions that skip and branch</li>
+        <li>Small edits every month</li>
+        <li>Monthly response and drop-off summary</li>
+      </ul>
+      <a class="btn" href="#start">Choose Business</a>
+    </div>
+    <div class="plan">
+      <h3>Business Plus</h3>
+      <div class="amt">$49<small>/mo</small></div>
+      <div class="per">+ $199 one-time setup</div>
+      <ul>
+        <li>Up to 3 forms</li>
+        <li>Everything in Business</li>
+        <li>Payments, uploads and e-signatures</li>
+        <li>Instant price calculators</li>
+        <li>One integration (CRM, Notion, Airtable)</li>
+        <li>Priority turnaround on edits</li>
+      </ul>
+      <a class="btn ghost" href="#start">Choose Business Plus</a>
+    </div>
+  </div>
+  <div class="addon indent">
+    <span><b>Pay yearly</b> 12 months for the price of 10</span>
+    <span><b>Business plans</b> 3-month minimum</span>
+    <span><b>Edits</b> up to 30 min a month included, then $45 per half hour</span>
+    <span><b>Rush build (48 hr)</b> +$75</span>
+  </div>
+</section>
+
+<section class="field">
+  <div class="field-head">
+    <span class="num">06 / Questions</span>
+    <div><h2>Before you ask.</h2></div>
+  </div>
+  <div class="faq indent">
+    <details><summary>Who owns the responses?</summary><p>You do. Responses go straight to your email and your own Google Sheet or tool. You can request a full export at any time.</p></details>
+    <details><summary>Do I need to learn any software?</summary><p>No. We build and maintain the form. You just read the responses wherever you already work.</p></details>
+    <details><summary>Can it go on my existing website?</summary><p>Yes. We give you an embed code, a pop-up button, or a standalone link on your own sub-domain.</p></details>
+    <details><summary>What does the monthly fee cover?</summary><p>Keeping your form live on your own web address with your branding, small edits when your questions or prices change, a check that everything still works, and a monthly summary of responses and drop-off.</p></details>
+    <details><summary>What counts as a small edit?</summary><p>Changing questions, options, prices, text or where responses are sent. Up to 30 minutes a month is included. Bigger jobs, like a new form or a new integration, are quoted first.</p></details>
+    <details><summary>What happens if I cancel?</summary><p>Business plans have a 3-month minimum, then you can cancel any time. When you cancel, the form goes offline at the end of your billing period and you get a full export of every response.</p></details>
+    <details><summary>Who is the Personal plan for?</summary><p>Personal events and groups: party RSVPs, reunions, club sign-ups, team rosters and one-off surveys. Anything that takes payments, uses your business name or address, or needs ongoing changes is a Business form.</p></details>
+    <details><summary>Are there payment processing fees?</summary><p>Stripe charges its standard card fees to your own Stripe account. We add nothing on top.</p></details>
+  </div>
+</section>
+
+<section class="field" id="start">
+  <div class="field-head">
+    <span class="num">07 / Start</span>
+    <div><h2>Start your form.</h2><p>Send a few details and you'll get a fixed quote within one business day.</p></div>
+  </div>
+  <div class="contact indent">
+    <div id="tally-slot" hidden></div>
+    <form class="cf" id="cf" novalidate>
+      <label for="cf-name">Name <span class="req">*</span><input id="cf-name" required autocomplete="name"></label>
+      <label for="cf-email">Email <span class="req">*</span><input id="cf-email" type="email" required autocomplete="email"></label>
+      <label for="cf-type">What kind of form?
+        <select id="cf-type"><option>Quote request</option><option>Intake or application</option><option>Registration or booking</option><option>Waiver or consent</option><option>Order or payment</option><option>Something else</option></select>
+      </label>
+      <label for="cf-notes">What do you need to collect?<textarea id="cf-notes" rows="4"></textarea></label>
+      <div><button class="btn" type="submit">Request a quote</button></div>
+      <p class="sent" id="cf-msg" hidden></p>
+    </form>
+    <div>
+      <span class="label">What to have ready</span>
+      <ul style="color:var(--muted);padding-left:20px;margin-top:12px">
+        <li>Your logo and brand colours</li>
+        <li>The questions you ask today, even on paper</li>
+        <li>Where you want responses sent</li>
+        <li>Your Stripe account, if taking payments</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 IdealForms</span>
+  <span>Made in Canada</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var qs=[
+    {t:"Who is this form for?",h:"This decides which plans fit.",k:"who",o:[
+      ["A business or organization",0],["A personal event, club or one-off",1]]},
+    {t:"What does the form need to do?",h:"Pick the closest match.",k:"type",o:[
+      ["Collect contact details or feedback",0],["Quote, intake or application",1],["Registration with payment",2],["Waiver or sign-off with signature",2]]},
+    {t:"How many forms do you need?",h:"Right now, or over the next few months.",k:"count",o:[
+      ["Just one",0],["Two or three",1],["Four or more",2]]}
+  ];
+  var ans={},i=0,body=document.getElementById("qBody"),bar=document.getElementById("bar"),lbl=document.getElementById("stepLbl");
+  function render(){
+    if(i>=qs.length) return result();
+    var q=qs[i]; bar.style.width=((i+1)/(qs.length+1)*100)+"%"; lbl.textContent="Question "+(i+1)+" of "+qs.length;
+    var h='<div class="q"><h3>'+q.t+'</h3><p class="hint">'+q.h+'</p><div class="opts">';
+    q.o.forEach(function(o,j){h+='<button type="button" class="opt" aria-pressed="'+(ans[q.k]===j)+'" data-j="'+j+'"><span class="key">'+String.fromCharCode(65+j)+'</span>'+o[0]+'</button>';});
+    h+='</div><div class="q-nav"><button type="button" class="link" id="back" '+(i===0?"disabled":"")+'>&larr; Back</button><span class="label">Click an answer</span></div></div>';
+    body.innerHTML=h;
+    body.querySelectorAll(".opt").forEach(function(b){b.addEventListener("click",function(){ans[q.k]=+b.dataset.j;b.setAttribute("aria-pressed","true");setTimeout(function(){i++;render();},180);});});
+    document.getElementById("back").addEventListener("click",function(){if(i>0){i--;render();}});
+  }
+  function score(k){var q=qs.filter(function(x){return x.k===k})[0];return q.o[ans[k]][1];}
+  function result(){
+    bar.style.width="100%"; lbl.textContent="Your match";
+    var personal=score("who")===1,t=score("type"),c=score("count"),plan;
+    if(personal&&t<2){
+      plan={n:"Personal",p:'$59<small>'+(c>0?' per form':' once')+'</small>',l:["Live for 6 months","Email alerts and Google Sheets","No monthly fee"]};
+    } else if(t===2||c>0){
+      plan={n:"Business Plus",p:'$49<small>/mo + $199 setup</small>',l:[t===2&&personal?"Payments and signatures need a Business plan":"Payments, uploads and e-signatures",c===2?"Up to 3 forms included; we'll quote a bundle for more":"Up to 3 forms on your own web address","Small edits every month"]};
+    } else {
+      plan={n:"Business",p:'$29<small>/mo + $99 setup</small>',l:["Your logo, colours and web address","Small edits every month","Monthly response summary"]};
+    }
+    body.innerHTML='<div class="result"><span class="label">Recommended plan</span><h3 style="font-size:28px;margin:6px 0 14px">'+plan.n+'</h3><div class="price">'+plan.p+'</div><ul>'+plan.l.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ul><div class="cta-row"><a class="btn" href="#start">Start this form</a><button type="button" class="btn ghost" id="again">Start over</button></div></div>';
+    document.getElementById("again").addEventListener("click",function(){ans={};i=0;render();});
+  }
+  render();
+
+  // Paste your Tally form ID here (the part after tally.so/r/) to swap the placeholder form for your real one.
+  var TALLY_FORM_ID="";
+  if(TALLY_FORM_ID){
+    var slot=document.getElementById("tally-slot");
+    slot.innerHTML='<iframe data-tally-src="https://tally.so/embed/'+TALLY_FORM_ID+'?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" title="Start your form"></iframe>';
+    slot.hidden=false; document.getElementById("cf").hidden=true;
+    var sc=document.createElement("script"); sc.src="https://tally.so/widgets/embed.js";
+    sc.onload=function(){ if(window.Tally) window.Tally.loadEmbeds(); }; document.body.appendChild(sc);
+  }
+  document.getElementById("cf").addEventListener("submit",function(e){
+    e.preventDefault();
+    var n=document.getElementById("cf-name"),m=document.getElementById("cf-email"),msg=document.getElementById("cf-msg");
+    msg.hidden=false;
+    if(!n.value.trim()||!/^\S+@\S+\.\S+$/.test(m.value)){msg.textContent="Add your name and a valid email so we can send the quote.";return;}
+    msg.textContent="This form is not connected yet. Add your Tally form ID to go live.";
+  });
+})();
+</script>
+</body>
+</html>
