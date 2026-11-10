@@ -41,6 +41,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   --accent:#7B8CFF; --accent-ink:#0E1320; --mark:#E0C23A; color-scheme:dark}
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .wrap{max-width:1120px;margin:0 auto}
@@ -168,6 +169,9 @@ details p{color:var(--muted);margin:10px 0 0;max-width:68ch}
 .cf label{display:grid;gap:6px;font-size:15px;font-weight:500}
 .cf input,.cf select,.cf textarea{font:16px var(--f-body);padding:12px 14px;border:1.5px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);width:100%}
 .cf input:focus,.cf select:focus,.cf textarea:focus{border-color:var(--accent);outline:none}
+/* Tally embed sits on a fixed light card so it reads the same in light and dark mode */
+#tally-slot{background:#F8FAF9;border:1.5px solid var(--rule);border-radius:10px;padding:22px 20px 6px;min-width:0;color-scheme:light}
+#tally-slot iframe{display:block}
 .sent{font-family:var(--f-mono);font-size:14px;color:var(--accent)}
 
 footer a{color:var(--muted)}
@@ -470,11 +474,11 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
   if(TALLY_FORM_ID){
     var slot=document.getElementById("tally-slot");
     slot.innerHTML='<iframe data-tally-src="https://tally.so/embed/'+TALLY_FORM_ID+'?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'+(REF?'&ref='+encodeURIComponent(REF):'')+'" loading="lazy" width="100%" height="566" frameborder="0" marginheight="0" marginwidth="0" title="Start your form"></iframe>';
-    slot.hidden=false; document.getElementById("cf").hidden=true;
+    slot.hidden=false; var cfEl=document.getElementById("cf"); if(cfEl) cfEl.remove();
     var sc=document.createElement("script"); sc.src="https://tally.so/widgets/embed.js";
     var load=function(){ if(window.Tally) window.Tally.loadEmbeds(); else slot.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(f){f.src=f.dataset.tallySrc;}); }; sc.onload=load; sc.onerror=load; document.body.appendChild(sc);
   }
-  document.getElementById("cf").addEventListener("submit",function(e){
+  var cfForm=document.getElementById("cf"); if(cfForm) cfForm.addEventListener("submit",function(e){
     e.preventDefault();
     var n=document.getElementById("cf-name"),m=document.getElementById("cf-email"),msg=document.getElementById("cf-msg");
     msg.hidden=false;
