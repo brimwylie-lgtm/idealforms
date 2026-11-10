@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en-CA">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W3GWJ95N');</script>
+<!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>IdealForms | Done-for-you online forms</title>
@@ -8,6 +15,11 @@
 <meta property="og:title" content="IdealForms | Done-for-you online forms">
 <meta property="og:description" content="Branded online forms built for you. Small setup fee, simple monthly plan.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://idealforms.ca/">
+<meta property="og:image" content="https://idealforms.ca/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#15203A">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,11 +117,16 @@ section.field{border-top:1.5px solid var(--ink);padding-block:56px}
 /* examples */
 .examples{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .ex{background:var(--sheet);border:1.5px solid var(--rule);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.ex .mock{border:1.5px dashed var(--rule);border-radius:6px;padding:14px;display:grid;gap:8px;margin-bottom:6px}
+.ex .mock{border:1.5px dashed var(--rule);border-radius:6px;padding:14px;display:grid;gap:8px;margin-bottom:6px;height:156px;align-content:start;overflow:hidden}
 .ex .mock i{display:block;height:9px;border-radius:3px;background:var(--rule)}
 .ex .mock i.s{width:45%}.ex .mock i.m{width:70%}
 .ex .mock i.b{height:26px;background:transparent;border:1.5px solid var(--rule)}
 .ex .mock i.c{width:34%;height:22px;background:var(--accent);opacity:.8}
+.ex .tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.style-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1.5px solid var(--rule);padding:1px 7px;border-radius:3px}
+.ex .mock.pop{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.ex .mock.pop b{display:grid;gap:8px;background:var(--sheet);border:1.5px solid var(--rule);border-radius:6px;padding:10px;margin:2px 14px 0;box-shadow:0 10px 20px -12px rgba(21,32,58,.4)}
+.ex .mock.link i.url{height:18px;width:80%;border-radius:999px;background:transparent;border:1.5px solid var(--accent)}
 .ex h3{font-size:22px;font-weight:600}
 .ex p{color:var(--muted);font-size:15px;margin:0;flex:1}
 
@@ -153,6 +170,7 @@ details p{color:var(--muted);margin:10px 0 0;max-width:68ch}
 .cf input:focus,.cf select:focus,.cf textarea:focus{border-color:var(--accent);outline:none}
 .sent{font-family:var(--f-mono);font-size:14px;color:var(--accent)}
 
+footer a{color:var(--muted)}
 footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px}
 
 @media (max-width:900px){
@@ -175,6 +193,9 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W3GWJ95N" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <div class="wrap">
 <nav>
   <div class="logo"><span class="logo-box" aria-hidden="true"></span>IdealForms</div>
@@ -244,30 +265,30 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
     <span class="num">03 / Live examples</span>
     <div>
       <h2>Real forms, running right now.</h2>
-      <p>Open one and try it. These are the same builds clients get.</p>
+      <p>Three ways to put a form in front of people: inside your page, as a pop-up, or as a link you share anywhere.</p>
     </div>
   </div>
   <div class="examples indent">
     <article class="ex">
       <div class="mock" aria-hidden="true"><i class="s"></i><i class="b"></i><i class="m"></i><i class="b"></i><i class="c"></i></div>
-      <span class="example-tag">LIVE</span>
+      <div class="tags"><span class="example-tag">LIVE</span><span class="style-tag">Embedded on page</span></div>
       <h3>TL;DW Studios</h3>
-      <p>Free-sample request form for a content repurposing studio, embedded right on the client's own site.</p>
+      <p>Free-sample request for a content repurposing studio. The form sits right inside the client's contact section.</p>
       <a href="https://www.tldwstudios.com/#contact" target="_blank" rel="noopener">Open the live form &rarr;</a>
     </article>
     <article class="ex">
-      <div class="mock" aria-hidden="true"><i class="m"></i><i class="b"></i><i class="b"></i><i class="s"></i><i class="c"></i></div>
-      <span class="example-tag">COMING SOON</span>
-      <h3>Event registration</h3>
-      <p>Ticket choice, running total and Stripe checkout in one flow.</p>
-      <a href="#examples">Open the live form &rarr;</a>
+      <div class="mock pop" aria-hidden="true"><i class="s"></i><i class="m"></i><b><i class="s"></i><i class="b"></i><i class="c"></i></b></div>
+      <div class="tags"><span class="example-tag">LIVE</span><span class="style-tag">Pop-up</span></div>
+      <h3>AfterWage</h3>
+      <p>Project scoping request that opens as a pop-up from the contact page, with a personalised thank-you once it's sent.</p>
+      <a href="https://www.afterwage.com/contact" target="_blank" rel="noopener">Open the live form &rarr;</a>
     </article>
     <article class="ex">
-      <div class="mock" aria-hidden="true"><i class="s"></i><i class="b"></i><i class="m"></i><i class="b"></i><i class="c"></i></div>
-      <span class="example-tag">COMING SOON</span>
-      <h3>Waiver with signature</h3>
-      <p>Participant details, terms and a signature that saves to a PDF.</p>
-      <a href="#examples">Open the live form &rarr;</a>
+      <div class="mock link" aria-hidden="true"><i class="url"></i><i class="s"></i><i class="b"></i><i class="b"></i><i class="c"></i></div>
+      <div class="tags"><span class="example-tag">LIVE</span><span class="style-tag">Shareable link</span></div>
+      <h3>The Stork Club Story</h3>
+      <p>Audience vote for a stage play, shared by text and email as one short, branded link. A Personal plan form.</p>
+      <a href="https://forms.idealforms.ca/storkclub" target="_blank" rel="noopener">Open the live form &rarr;</a>
     </article>
   </div>
 </section>
@@ -300,7 +321,8 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
       <div class="per">one-time, live for 6 months</div>
       <ul>
         <li>One form, up to 15 questions</li>
-        <li>Clean, unbranded design</li>
+        <li>Clean design on a short forms.idealforms.ca link</li>
+        <li>Small &ldquo;Powered by IdealForms&rdquo; note on the thank-you screen</li>
         <li>Email alert on every response</li>
         <li>Google Sheets export</li>
         <li>For events, clubs and one-offs</li>
@@ -314,6 +336,7 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
       <ul>
         <li>One form, unlimited questions</li>
         <li>Your logo, colours and web address</li>
+        <li>No IdealForms branding</li>
         <li>Email alerts and Google Sheets</li>
         <li>Smart questions that skip and branch</li>
         <li>Small edits every month</li>
@@ -352,7 +375,8 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
   <div class="faq indent">
     <details><summary>Who owns the responses?</summary><p>You do. Responses go straight to your email and your own Google Sheet or tool. You can request a full export at any time.</p></details>
     <details><summary>Do I need to learn any software?</summary><p>No. We build and maintain the form. You just read the responses wherever you already work.</p></details>
-    <details><summary>Can it go on my existing website?</summary><p>Yes. We give you an embed code, a pop-up button, or a standalone link on your own sub-domain.</p></details>
+    <details><summary>Can it go on my existing website?</summary><p>Yes. It can sit inside a page, open as a pop-up from a button, or live on its own link. The examples above show all three.</p></details>
+    <details><summary>Will my form show your branding?</summary><p>Business forms carry no IdealForms branding. Personal forms show a small &ldquo;Powered by IdealForms&rdquo; note on the thank-you screen, after the form is sent, never on the form itself.</p></details>
     <details><summary>What does the monthly fee cover?</summary><p>Keeping your form live on your own web address with your branding, small edits when your questions or prices change, a check that everything still works, and a monthly summary of responses and drop-off.</p></details>
     <details><summary>What counts as a small edit?</summary><p>Changing questions, options, prices, text or where responses are sent. Up to 30 minutes a month is included. Bigger jobs, like a new form or a new integration, are quoted first.</p></details>
     <details><summary>What happens if I cancel?</summary><p>Business plans have a 3-month minimum, then you can cancel any time. When you cancel, the form goes offline at the end of your billing period and you get a full export of every response.</p></details>
@@ -392,7 +416,7 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
 
 <footer>
   <span>&copy; 2026 IdealForms</span>
-  <span>Made in Canada</span>
+  <span><a href="/privacy">Privacy</a> &middot; Made in Canada</span>
 </footer>
 </div>
 
@@ -435,9 +459,17 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
 
   // Paste your Tally form ID here (the part after tally.so/r/) to swap the placeholder form for your real one.
   var TALLY_FORM_ID="";
+  // Referral: read ?utm_source= or ?ref= and pass it to the intake form's hidden "ref" field.
+  var REF="";
+  try{
+    var sp=new URLSearchParams(location.search);
+    REF=(sp.get("utm_source")||sp.get("ref")||"").toLowerCase().replace(/[^a-z0-9_-]/g,"").slice(0,60);
+    if(REF) sessionStorage.setItem("if_ref",REF); else REF=sessionStorage.getItem("if_ref")||"";
+  }catch(e){}
+  if(REF && window.dataLayer) window.dataLayer.push({event:"if_referral",referral_source:REF});
   if(TALLY_FORM_ID){
     var slot=document.getElementById("tally-slot");
-    slot.innerHTML='<iframe data-tally-src="https://tally.so/embed/'+TALLY_FORM_ID+'?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" title="Start your form"></iframe>';
+    slot.innerHTML='<iframe data-tally-src="https://tally.so/embed/'+TALLY_FORM_ID+'?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'+(REF?'&ref='+encodeURIComponent(REF):'')+'" loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" title="Start your form"></iframe>';
     slot.hidden=false; document.getElementById("cf").hidden=true;
     var sc=document.createElement("script"); sc.src="https://tally.so/widgets/embed.js";
     sc.onload=function(){ if(window.Tally) window.Tally.loadEmbeds(); }; document.body.appendChild(sc);
