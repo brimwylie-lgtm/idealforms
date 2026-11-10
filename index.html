@@ -458,7 +458,7 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
   render();
 
   // Paste your Tally form ID here (the part after tally.so/r/) to swap the placeholder form for your real one.
-  var TALLY_FORM_ID="";
+  var TALLY_FORM_ID="Kp5zRV";
   // Referral: read ?utm_source= or ?ref= and pass it to the intake form's hidden "ref" field.
   var REF="";
   try{
@@ -469,10 +469,10 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
   if(REF && window.dataLayer) window.dataLayer.push({event:"if_referral",referral_source:REF});
   if(TALLY_FORM_ID){
     var slot=document.getElementById("tally-slot");
-    slot.innerHTML='<iframe data-tally-src="https://tally.so/embed/'+TALLY_FORM_ID+'?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'+(REF?'&ref='+encodeURIComponent(REF):'')+'" loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" title="Start your form"></iframe>';
+    slot.innerHTML='<iframe data-tally-src="https://tally.so/embed/'+TALLY_FORM_ID+'?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1'+(REF?'&ref='+encodeURIComponent(REF):'')+'" loading="lazy" width="100%" height="566" frameborder="0" marginheight="0" marginwidth="0" title="Start your form"></iframe>';
     slot.hidden=false; document.getElementById("cf").hidden=true;
     var sc=document.createElement("script"); sc.src="https://tally.so/widgets/embed.js";
-    sc.onload=function(){ if(window.Tally) window.Tally.loadEmbeds(); }; document.body.appendChild(sc);
+    var load=function(){ if(window.Tally) window.Tally.loadEmbeds(); else slot.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(f){f.src=f.dataset.tallySrc;}); }; sc.onload=load; sc.onerror=load; document.body.appendChild(sc);
   }
   document.getElementById("cf").addEventListener("submit",function(e){
     e.preventDefault();

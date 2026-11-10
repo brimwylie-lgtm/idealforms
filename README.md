@@ -12,7 +12,7 @@ No build step: `index.html`, `privacy.html`, a favicon and a share image. Vercel
 
 ## Connect the "Start your form" section to Tally
 
-The contact section shows a placeholder form until you add a Tally form ID.
+The contact section loads Tally form `Kp5zRV`. Clear `TALLY_FORM_ID` to fall back to the placeholder form.
 
 1. Build the intake form in Tally and publish it.
 2. Copy the ID from its share link (`tally.so/r/ABC123` means the ID is `ABC123`).
