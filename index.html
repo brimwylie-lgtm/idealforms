@@ -123,6 +123,15 @@ section.field{border-top:1.5px solid var(--ink);padding-block:56px}
 .ex .mock i.s{width:45%}.ex .mock i.m{width:70%}
 .ex .mock i.b{height:26px;background:transparent;border:1.5px solid var(--rule)}
 .ex .mock i.c{width:34%;height:22px;background:var(--accent);opacity:.8}
+.example-tag.demo{background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:0 6px}
+.ex .mock .chk{display:flex;gap:8px}.ex .mock .chk i{width:30%;height:22px;border:1.5px solid var(--rule);border-radius:4px;background:transparent}
+.ex .mock .chk i:first-child,.ex .mock .chk i:nth-child(2){border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.ex .mock .tot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px dashed var(--rule);padding-top:6px}
+.ex .mock .tot em{font:600 15px var(--f-mono);font-style:normal;color:var(--ink)}
+.ex .mock .drop{display:grid;place-items:center;height:40px;border:1.5px dashed var(--accent);border-radius:6px}
+.ex .mock .drop i{width:40%}
+.ex .mock .prog{display:block;height:6px;background:var(--rule);border-radius:4px;overflow:hidden;margin-bottom:4px}
+.ex .mock .prog i{display:block;height:100%;width:60%;background:var(--accent)}
 .ex .tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .style-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1.5px solid var(--rule);padding:1px 7px;border-radius:3px}
 .ex .mock.pop{background:color-mix(in srgb,var(--ink) 6%,transparent)}
@@ -268,8 +277,8 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
   <div class="field-head">
     <span class="num">03 / Live examples</span>
     <div>
-      <h2>Real forms, running right now.</h2>
-      <p>Three ways to put a form in front of people: inside your page, as a pop-up, or as a link you share anywhere.</p>
+      <h2>Real forms you can try right now.</h2>
+      <p>The first row shows the three ways a form can reach people: inside your page, as a pop-up, or as a link you share anywhere. The second row shows what a form can do. Client work is marked Live; samples we built to show a feature are marked Demo.</p>
     </div>
   </div>
   <div class="examples indent">
@@ -293,6 +302,27 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
       <h3>The Stork Club Story</h3>
       <p>Audience vote for a stage play, shared by text and email as one short, branded link. A Personal plan form.</p>
       <a href="https://forms.idealforms.ca/storkclub" target="_blank" rel="noopener">Open the live form &rarr;</a>
+    </article>
+    <article class="ex">
+      <div class="mock calc" aria-hidden="true"><i class="s"></i><span class="chk"><i></i><i></i><i></i></span><span class="tot"><i class="s"></i><em>$</em></span><i class="c"></i></div>
+      <div class="tags"><span class="example-tag">LIVE</span><span class="style-tag">Payments + calculator</span></div>
+      <h3>Markham Campaign Builder</h3>
+      <p>Advertisers pick recreation centre screens and a run length, watch the price update with discounts applied, then pay by card and sign.</p>
+      <a href="https://forms.idealforms.ca/markhamcampaignbuilder" target="_blank" rel="noopener">Open the live form &rarr;</a>
+    </article>
+    <article class="ex">
+      <div class="mock up" aria-hidden="true"><i class="s"></i><i class="b"></i><span class="drop"><i class="s"></i></span><i class="c"></i></div>
+      <div class="tags"><span class="example-tag demo">DEMO</span><span class="style-tag">Uploads + multi-page</span></div>
+      <h3>Job application</h3>
+      <p>Two-page application with resume and cover letter upload, a referral question and a location check.</p>
+      <a href="https://forms.idealforms.ca/jobapplication" target="_blank" rel="noopener">Try the demo &rarr;</a>
+    </article>
+    <article class="ex">
+      <div class="mock stepper" aria-hidden="true"><span class="prog"><i></i></span><i class="s"></i><i class="b"></i><i class="b"></i><i class="c"></i></div>
+      <div class="tags"><span class="example-tag demo">DEMO</span><span class="style-tag">Multi-step + progress bar</span></div>
+      <h3>Event registration</h3>
+      <p>Five-step conference registration. Each step has to be complete before the next one opens, and a progress bar shows how far along people are.</p>
+      <a href="https://forms.idealforms.ca/eventreg" target="_blank" rel="noopener">Try the demo &rarr;</a>
     </article>
   </div>
 </section>
