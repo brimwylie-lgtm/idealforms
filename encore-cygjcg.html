@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Encore poll | Live results</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@600;800&family=Funnel+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#EDF1EF; --sheet:#F8FAF9; --ink:#15203A; --muted:#5B6678; --rule:#C9D3CF;
+  --accent:#2E47E6; --track:#E2E8E5; --mark:#F2D44A;
+  --f-display:"Funnel Display","Segoe UI",system-ui,sans-serif;
+  --f-body:"Funnel Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#0E1320; --sheet:#151C2D; --ink:#E6EAF2; --muted:#9AA4B8; --rule:#2A3449;
+  --accent:#7B8CFF; --track:#1F2840; --mark:#E0C23A; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.5;
+  padding:0 max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:760px;margin:0 auto;padding-block:40px 56px}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,6vw,52px);letter-spacing:-.02em;line-height:1.05;margin:10px 0 8px}
+.sub{color:var(--muted);margin:0 0 28px}
+.status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.dot{width:9px;height:9px;border-radius:50%;background:#1F9D55;box-shadow:0 0 0 0 rgba(31,157,85,.5);animation:pulse 2s infinite}
+.dot.err{background:#C2410C;animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(31,157,85,0)}100%{box-shadow:0 0 0 0 rgba(31,157,85,0)}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none}}
+.sheet{background:var(--sheet);border:1.5px solid var(--rule);border-radius:10px;padding:26px 26px 22px;margin-bottom:22px}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1.5px dashed var(--rule);padding-bottom:12px;margin-bottom:18px}
+h2{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0;line-height:1.15}
+.row{margin-bottom:16px}
+.row:last-child{margin-bottom:4px}
+.rl{display:flex;justify-content:space-between;gap:12px;margin-bottom:6px;font-size:16px}
+.rl b{font-weight:600}
+.num{font-family:var(--f-mono);font-size:14px;color:var(--muted);white-space:nowrap}
+.num strong{color:var(--ink);font-weight:500}
+.track{height:14px;background:var(--track);border-radius:3px;overflow:hidden}
+.bar{height:100%;background:var(--accent);border-radius:0 3px 3px 0}
+.tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:var(--mark);color:#15203A;padding:1px 6px;border-radius:3px;margin-left:8px;vertical-align:2px}
+.note{background:var(--sheet);border:1.5px dashed var(--accent);border-radius:8px;padding:12px 16px;font-size:15px;margin-bottom:22px}
+footer{border-top:1.5px solid var(--ink);padding-top:18px;margin-top:32px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="label">Poll results</div>
+  <h1>Vote for an encore</h1>
+  <p class="sub">The Stork Club Story</p>
+
+  <div class="status" aria-live="polite">
+    <span class="dot"></span>
+    <span class="label" id="status">Loading results&hellip;</span>
+  </div>
+
+  <div id="results"></div>
+
+  <footer>
+    <span>Private link. Please don't share it publicly.</span>
+    <span>Powered by <a href="https://idealforms.ca/?utm_source=encore-results&amp;utm_medium=poweredby">IdealForms</a></span>
+  </footer>
+</div>
+
+<script>
+/* Vote counts from the Tally export. All votes counted, including repeat voters.
+   To update: change the numbers and the UPDATED line, then re-upload this file. */
+const UPDATED = "Nov 11, 2:30 p.m.";
+const RESULTS = [
+  { question: "Vote for an encore", options: [
+    ["Yes! To see it for the first time.", 18],
+    ["Yes! To see it again.", 7],
+    ["Maybe! I'd need more details.", 1]
+  ]},
+  { question: "Vote for where", options: [
+    ["St Thomas (The Elgin Theatre)", 11],
+    ["Port Stanley (The Summer Festival Theatre)", 9],
+    ["London (The Grand Theatre)", 6]
+  ]}
+];
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+document.getElementById("results").innerHTML = RESULTS.map(g=>{
+  const total=g.options.reduce((a,o)=>a+o[1],0);
+  const max=Math.max(...g.options.map(o=>o[1]));
+  const leaders=g.options.filter(o=>o[1]===max).length;
+  return `<section class="sheet"><div class="qhead"><h2>${esc(g.question)}</h2><span class="num"><strong>${total}</strong> vote${total==1?"":"s"}</span></div>`+
+    g.options.map(([label,v])=>{
+      const pct=total?Math.round(v/total*100):0;
+      const lead=total&&v===max&&leaders===1;
+      return `<div class="row"><div class="rl"><b>${esc(label)}${lead?'<span class="tag">Leading</span>':""}</b><span class="num"><strong>${v}</strong> &middot; ${pct}%</span></div>`+
+        `<div class="track" role="img" aria-label="${esc(label)}: ${v} votes, ${pct} percent"><div class="bar" style="width:${max?v/max*100:0}%"></div></div></div>`;
+    }).join("")+`</section>`;
+}).join("");
+document.getElementById("status").textContent = "Votes counted to " + UPDATED;
+</script>
+</body>
+</html>
