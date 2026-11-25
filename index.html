@@ -132,6 +132,17 @@ section.field{border-top:1.5px solid var(--ink);padding-block:56px}
 .ex .mock .drop i{width:40%}
 .ex .mock .prog{display:block;height:6px;background:var(--rule);border-radius:4px;overflow:hidden;margin-bottom:4px}
 .ex .mock .prog i{display:block;height:100%;width:60%;background:var(--accent)}
+.ex .mock .drop.thin{height:26px}
+.ex .mock .fork{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ex .mock .fork>span{display:grid;gap:6px;padding:8px;border:1.5px solid var(--rule);border-radius:5px}
+.ex .mock .fork>span:first-child{border-color:var(--accent)}
+.ex .mock .sig{display:block;height:26px;border-bottom:2px solid var(--ink);width:60%;position:relative}
+.ex .mock .sig::after{content:"";position:absolute;left:8px;bottom:5px;width:70px;height:12px;border:2px solid var(--accent);border-color:transparent transparent var(--accent) var(--accent);border-radius:0 0 0 14px;transform:skewX(-25deg)}
+.ex .mock .meter{display:block;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--rule),var(--mark),var(--accent));position:relative}
+.ex .mock .meter i{position:absolute;left:78%;top:-4px;width:4px;height:20px;background:var(--ink);border-radius:2px}
+.ex .mock .routes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ex .mock .routes b{display:block;height:24px;border:1.5px solid var(--rule);border-radius:4px}
+.ex .mock .routes b.hot{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
 .ex .tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .style-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1.5px solid var(--rule);padding:1px 7px;border-radius:3px}
 .ex .mock.pop{background:color-mix(in srgb,var(--ink) 6%,transparent)}
@@ -278,7 +289,7 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
     <span class="num">03 / Live examples</span>
     <div>
       <h2>Real forms you can try right now.</h2>
-      <p>The first row shows the three ways a form can reach people: inside your page, as a pop-up, or as a link you share anywhere. The second row shows what a form can do. Client work is marked Live; samples we built to show a feature are marked Demo.</p>
+      <p>The first row shows the three ways a form can reach people: inside your page, as a pop-up, or as a link you share anywhere. The rows below show what a form can do, from simple uploads to pricing, branching and lead scoring. Client work is marked Live; samples we built to show a feature are marked Demo.</p>
     </div>
   </div>
   <div class="examples indent">
@@ -324,6 +335,27 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
       <p>Five-step conference registration. Each step has to be complete before the next one opens, and a progress bar shows how far along people are.</p>
       <a href="https://forms.idealforms.ca/eventreg" target="_blank" rel="noopener">Try the demo &rarr;</a>
     </article>
+    <article class="ex">
+      <div class="mock calc" aria-hidden="true"><span class="chk"><i></i><i></i><i></i></span><span class="drop thin"><i class="s"></i></span><span class="tot"><i class="s"></i><em>$ + HST</em></span><i class="c"></i></div>
+      <div class="tags"><span class="example-tag demo">DEMO</span><span class="style-tag">Live pricing + deposit</span></div>
+      <h3>Home services quote</h3>
+      <p>Homeowners pick services, answer a few questions and watch the price update with HST included. They add photos of the job and pay a deposit to book.</p>
+      <a href="https://forms.idealforms.ca/instantquote" target="_blank" rel="noopener">Try the demo &rarr;</a>
+    </article>
+    <article class="ex">
+      <div class="mock branch" aria-hidden="true"><i class="s"></i><span class="fork"><span><i class="m"></i><i class="b"></i></span><span><i class="m"></i><i class="b"></i></span></span><span class="sig"></span></div>
+      <div class="tags"><span class="example-tag demo">DEMO</span><span class="style-tag">Branching + e-signature</span></div>
+      <h3>Client onboarding</h3>
+      <p>Accounting firm intake that only asks what applies to each client, requests the right documents for each service, and ends with an engagement summary to sign.</p>
+      <a href="https://forms.idealforms.ca/accountingonboarding" target="_blank" rel="noopener">Try the demo &rarr;</a>
+    </article>
+    <article class="ex">
+      <div class="mock score" aria-hidden="true"><i class="s"></i><span class="meter"><i></i></span><span class="routes"><b class="hot"></b><b></b><b></b></span><i class="c"></i></div>
+      <div class="tags"><span class="example-tag demo">DEMO</span><span class="style-tag">Lead scoring + routing</span></div>
+      <h3>Lead qualifier</h3>
+      <p>Six quick questions score each lead behind the scenes. Hot leads book a call on the spot, warm leads get a follow-up, and the rest get a free guide.</p>
+      <a href="https://forms.idealforms.ca/growthagency" target="_blank" rel="noopener">Try the demo &rarr;</a>
+    </article>
   </div>
 </section>
 
@@ -351,7 +383,7 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
   <div class="plans indent">
     <div class="plan">
       <h3>Personal</h3>
-      <div class="amt">$59</div>
+      <div class="amt">$79</div>
       <div class="per">one-time, live for 6 months</div>
       <ul>
         <li>One form, up to 15 questions</li>
@@ -480,7 +512,7 @@ footer{border-top:1.5px solid var(--ink);padding-block:28px 40px;display:flex;ju
     bar.style.width="100%"; lbl.textContent="Your match";
     var personal=score("who")===1,t=score("type"),c=score("count"),plan;
     if(personal&&t<2){
-      plan={n:"Personal",p:'$59<small>'+(c>0?' per form':' once')+'</small>',l:["Live for 6 months","Email alerts and Google Sheets","No monthly fee"]};
+      plan={n:"Personal",p:'$79<small>'+(c>0?' per form':' once')+'</small>',l:["Live for 6 months","Email alerts and Google Sheets","No monthly fee"]};
     } else if(t===2||c>0){
       plan={n:"Business Plus",p:'$49<small>/mo + $199 setup</small>',l:[t===2&&personal?"Payments and signatures need a Business plan":"Payments, uploads and e-signatures",c===2?"Up to 3 forms included; we'll quote a bundle for more":"Up to 3 forms on your own web address","Small edits every month"]};
     } else {
